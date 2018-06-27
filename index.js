@@ -13,7 +13,7 @@ function _expandConstantObject(object) {
 		if (Object.hasOwnProperty.call(object, key))
 			keys.push(key);
 	for (var i = 0; i < keys.length; i++)
-		object[object[keys[i]]] = parseInt(keys[i], 10);
+		object[object[keys[i]]] = keys[i];
 }
 
 var Transport = {
