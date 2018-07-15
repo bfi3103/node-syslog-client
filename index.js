@@ -6,6 +6,7 @@ var events = require("events");
 var net = require("net");
 var os = require("os");
 var util = require("util");
+var debugLogger = util.debuglog( 'logging' );
 
 function _expandConstantObject(object) {
 	var keys = [];
@@ -56,6 +57,7 @@ var Severity = {
 _expandConstantObject(Severity);
 
 function Client(target, options) {
+	debugLogger( "SyslogHost = %s", target );
 	this.target = target || "127.0.0.1";
 
 	if (!options)
@@ -145,7 +147,7 @@ Client.prototype.buildFormattedMessage = function buildFormattedMessage(message,
 				+ newline;
 	}
 
-	return new Buffer(formattedMessage);
+	return Buffer.from(formattedMessage);
 };
 
 Client.prototype.close = function close() {
